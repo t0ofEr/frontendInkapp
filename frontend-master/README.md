@@ -1,0 +1,1 @@
+npm i @date-io/date-fns @material-ui/core @material-ui/data-grid @material-ui/icons @material-ui/lab @material-ui/pickers @testing-library/jest-dom @testing-library/react @testing-library/user-event bootstrap date-fns moment react react-bootstrap react-dom react-router-dom react-scripts react-swipeable-views socket.io-client sweetalert2 web-vitals
