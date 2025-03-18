@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import ShowImage from './showImage';
-import { isAuthenticated } from '../auth';import moment from 'moment';
+import { isAuthenticated } from '../auth'; import moment from 'moment';
 import makeToast from '../Toaster/Toaster';
 import { likePublicacion } from '../user/apiUser';
 import { Favorite } from '@material-ui/icons';
@@ -130,7 +130,7 @@ const CardPublicacionPage = ({ publicacion }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 deletePublicacion(publicacion._id, dataUser.id, accessToken).then(data => {
                     if (data.error) {
@@ -138,13 +138,13 @@ const CardPublicacionPage = ({ publicacion }) => {
                             'Error!',
                             data.error,
                             'error'
-                          )
+                        )
                     } else {
                         setRedirect(true);
                     }
                 })
             }
-          })
+        })
     }
 
     const loadComentarios = () => {
@@ -176,7 +176,7 @@ const CardPublicacionPage = ({ publicacion }) => {
                         dataUser.id === publicacion.creador._id ? (
                             <div>
                                 <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                    <MoreVert/>
+                                    <MoreVert />
                                 </IconButton>
                                 <Menu
                                     id="simple-menu"
@@ -185,10 +185,10 @@ const CardPublicacionPage = ({ publicacion }) => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <Link to={`/profile/publication/update/${publicacion._id}`} style={{textDecoration: 'none'}}>
-                                        <MenuItem style= {{color: 'blue'}}>Modificar</MenuItem>
+                                    <Link to={`/profile/publication/update/${publicacion._id}`} style={{ textDecoration: 'none' }}>
+                                        <MenuItem style={{ color: 'blue' }}>Modificar</MenuItem>
                                     </Link>
-                                    <MenuItem onClick={clickEliminar} style={{color:'red'}}>Eliminar</MenuItem>
+                                    <MenuItem onClick={clickEliminar} style={{ color: 'red' }}>Eliminar</MenuItem>
                                 </Menu>
                             </div>
                         ) : (

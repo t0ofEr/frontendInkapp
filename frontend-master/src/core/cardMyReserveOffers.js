@@ -13,50 +13,50 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
+        minWidth: 275,
     },
     title: {
-      fontSize: 14,
+        fontSize: 14,
     },
     pos: {
-      marginTop: 12,
-      marginBottom: 12,
+        marginTop: 12,
+        marginBottom: 12,
     },
-  });
+});
 
-export default function SimpleCard( {offer} ) {
-        const classes = useStyles();
-        const {dataUser, accessToken} = isAuthenticated()
+export default function SimpleCard({ offer }) {
+    const classes = useStyles();
+    const { dataUser, accessToken } = isAuthenticated()
 
-        const clickSubmit = (offerId) => event => {
-                event.preventDefault()
-                Swal.fire({
-                    title: '¿Estas seguro?',
-                    text: "No podrás revertir este cambio",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, eliminala!'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                        deleteOfferReserve(dataUser.id, accessToken, offerId ).then((data) =>{
-                            if(data.error) {
-                                Swal.fire(
-                                    'Error!',
-                                    data.error,
-                                    'error'
-                                  )
-                            } else {
-                                window.location.reload();
-                             }   
-                        })
-                      
+    const clickSubmit = (offerId) => event => {
+        event.preventDefault()
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No podrás revertir este cambio",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminala!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteOfferReserve(dataUser.id, accessToken, offerId).then((data) => {
+                    if (data.error) {
+                        Swal.fire(
+                            'Error!',
+                            data.error,
+                            'error'
+                        )
+                    } else {
+                        window.location.reload();
                     }
-                  })
-        }
-        
-        return (
+                })
+
+            }
+        })
+    }
+
+    return (
         offer.proyecto ? (
             <Grid item xs={3} align="center">
                 <Card className={classes.root}>
@@ -64,7 +64,7 @@ export default function SimpleCard( {offer} ) {
                         <Typography gutterBottom variant="h6" component="h2" align="center">
                             {offer.proyecto.nombre}
                         </Typography>
-                            <ShowImage image={offer.proyecto} url="proyecto" h={'250px'} w={'100%'}/>
+                        <ShowImage image={offer.proyecto} url="proyecto" h={'250px'} w={'100%'} />
                         <Typography variant="body2" color="textSecondary" component="p">
                             {offer.descripcion}
                         </Typography>
@@ -72,20 +72,20 @@ export default function SimpleCard( {offer} ) {
                             {offer.estado.nombre}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            <AccessTimeIcon color="action" fontSize="small"/> {moment(offer.createdAt).fromNow()}
+                            <AccessTimeIcon color="action" fontSize="small" /> {moment(offer.createdAt).fromNow()}
                         </Typography>
                         <Button size="small" variant="contained" color="primary" onClick={clickSubmit(offer._id)} align="center">
                             Eliminar
                         </Button>
-                    </CardContent>      
+                    </CardContent>
                 </Card>
             </Grid>
         ) : (
             <Grid item xs={3} align="center">
                 <Card className={classes.root}>
                     <CardContent>
-                        <Typography gutterBottom variant="body1" component="h2" align="center"> 
-                        <AccessTimeIcon color="action" fontSize="small"/> {moment(offer.createdAt).fromNow()}
+                        <Typography gutterBottom variant="body1" component="h2" align="center">
+                            <AccessTimeIcon color="action" fontSize="small" /> {moment(offer.createdAt).fromNow()}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {offer.descripcion}
@@ -96,9 +96,9 @@ export default function SimpleCard( {offer} ) {
                         <Button variant="contained" color="primary" size="small" onClick={clickSubmit(offer._id)}>
                             Eliminar
                         </Button>
-                    </CardContent>      
+                    </CardContent>
                 </Card>
             </Grid>
-        )   
+        )
     );
 }

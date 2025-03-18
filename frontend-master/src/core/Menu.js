@@ -70,7 +70,7 @@ const Menu = ({ history }) => {
                                         isAuthenticated().dataUser.membresia === true || isAuthenticated().dataUser.tipo === 0 ? (
                                             <Nav.Link href="/chatroomsmenu">Chatrooms</Nav.Link>
                                         ) : (
-                                            <Nav.Link onClick={ () => makeToast('error', 'Debes adquirir una membresía')}>Chatrooms</Nav.Link>
+                                            <Nav.Link onClick={() => makeToast('error', 'Debes adquirir una membresía')}>Chatrooms</Nav.Link>
                                         )
                                     }
                                 </Fragment>
@@ -97,16 +97,16 @@ const Menu = ({ history }) => {
                                                 option.tipo === 0 ? (
                                                     null
                                                 ) : (
-                                                    <NavLink to={`/profile/${option._id}`} style={{ textDecoration: "none", color: "black"}}>
-                                                        <div style={{float:"left"}}>
-                                                            <ShowAvatar image={option} url={"perfil"}/> 
+                                                    <NavLink to={`/profile/${option._id}`} style={{ textDecoration: "none", color: "black" }}>
+                                                        <div style={{ float: "left" }}>
+                                                            <ShowAvatar image={option} url={"perfil"} />
                                                         </div>
-                                                        <div style={{float:"left", marginLeft:"10px", marginTop:"10px"}}>
+                                                        <div style={{ float: "left", marginLeft: "10px", marginTop: "10px" }}>
                                                             {option.userName}
                                                         </div>
                                                     </NavLink>
                                                 )
-                                                    
+
                                             }
                                         />
                                     </div>

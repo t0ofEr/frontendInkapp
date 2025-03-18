@@ -59,7 +59,7 @@ const CardHome = ({ publicacion }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 deletePublicacion(publicacion._id, dataUser.id, accessToken).then(data => {
                     if (data.error) {
@@ -67,13 +67,13 @@ const CardHome = ({ publicacion }) => {
                             'Error!',
                             data.error,
                             'error'
-                          )
+                        )
                     } else {
                         setRedirect(true);
                     }
                 })
             }
-          })
+        })
     }
 
     const redirectTo = () => {
@@ -106,7 +106,7 @@ const CardHome = ({ publicacion }) => {
                     dataUser && dataUser.id === publicacion.creador._id ? (
                         <div>
                             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                <MoreVert/>
+                                <MoreVert />
                             </IconButton>
                             <Menu
                                 id="simple-menu"
@@ -115,19 +115,19 @@ const CardHome = ({ publicacion }) => {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <Link to={`/profile/publication/view/${publicacion._id}`} style={{textDecoration: 'none'}}>
-                                    <MenuItem onClick={handleClose} style= {{color: 'orange'}}>Ver Publicación</MenuItem>
+                                <Link to={`/profile/publication/view/${publicacion._id}`} style={{ textDecoration: 'none' }}>
+                                    <MenuItem onClick={handleClose} style={{ color: 'orange' }}>Ver Publicación</MenuItem>
                                 </Link>
-                                <Link to={`/profile/publication/update/${publicacion._id}`} style={{textDecoration: 'none'}}>
-                                    <MenuItem style= {{color: 'blue'}}>Modificar</MenuItem>
+                                <Link to={`/profile/publication/update/${publicacion._id}`} style={{ textDecoration: 'none' }}>
+                                    <MenuItem style={{ color: 'blue' }}>Modificar</MenuItem>
                                 </Link>
-                                <MenuItem onClick={clickEliminar} style={{color:'red'}}>Eliminar</MenuItem>
+                                <MenuItem onClick={clickEliminar} style={{ color: 'red' }}>Eliminar</MenuItem>
                             </Menu>
                         </div>
                     ) : (
                         <div>
                             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                <MoreVert/>
+                                <MoreVert />
                             </IconButton>
                             <Menu
                                 id="simple-menu"
@@ -136,8 +136,8 @@ const CardHome = ({ publicacion }) => {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <Link to={`/profile/publication/view/${publicacion._id}`} style={{textDecoration: 'none'}}>
-                                    <MenuItem onClick={handleClose} style= {{color: 'orange'}}>Ver Publicación</MenuItem>
+                                <Link to={`/profile/publication/view/${publicacion._id}`} style={{ textDecoration: 'none' }}>
+                                    <MenuItem onClick={handleClose} style={{ color: 'orange' }}>Ver Publicación</MenuItem>
                                 </Link>
                             </Menu>
                         </div>
@@ -158,7 +158,7 @@ const CardHome = ({ publicacion }) => {
             <Link to={`/profile/publication/view/${publicacion._id}`}>
                 <ShowImage image={publicacion} url="publicacion" w="100%" h="350px" />
             </Link>
-            
+
             <CardContent className={classes.cardContent}>
                 <Typography variant="body1" color="textSecondary" component="p">
                     {publicacion.nombre}

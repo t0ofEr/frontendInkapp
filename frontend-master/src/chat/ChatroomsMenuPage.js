@@ -3,115 +3,117 @@ import makeToast from '../Toaster/Toaster'
 import { io } from 'socket.io-client'
 import { withRouter } from 'react-router-dom'
 import { isAuthenticated } from '../auth'
-import { API } from '../config' 
+import { API } from '../config'
 import Layout from '../core/Layout'
-import { Card, Grid, Button, Select, MenuItem, 
-    FormControl, InputLabel, makeStyles, Typography, CardContent, TextField } from '@material-ui/core'
+import {
+    Card, Grid, Button, Select, MenuItem,
+    FormControl, InputLabel, makeStyles, Typography, CardContent, TextField
+} from '@material-ui/core'
 
 
-    const DashboardPage = (props) => {
-    
+const DashboardPage = (props) => {
+
     const [chatrooms, setChatrooms] = React.useState([])
     const [chatroomsId, setChatroomsId] = React.useState('')
     const [chatroomName, setChatroomName] = React.useState('')
-    const {accessToken, dataUser} = isAuthenticated()
-    const [socket, setSocket] = React.useState('') 
-    
+    const { accessToken, dataUser } = isAuthenticated()
+    const [socket, setSocket] = React.useState('')
+
     const useStyles = makeStyles((theme) => ({
         formControl: {
-          margin: theme.spacing(1),
-          minWidth: 120,
+            margin: theme.spacing(1),
+            minWidth: 120,
         },
         root: {
             ...theme.typography.button,
             backgroundColor: "black",
             padding: theme.spacing(1),
-            color:'white',
+            color: 'white',
             textAlign: 'center'
-          },
-        
-      }));
+        },
+
+    }));
     const classes = useStyles();
-    const setupSocket = () =>{
-        
-        
-        if(accessToken && !socket){
-        const newSocket = io('http://localhost:8000', {
+    const setupSocket = () => {
 
-            query: {
-                token: accessToken
-            }
-        })
-        
 
-        newSocket.on('disconnect', () => {
-        setSocket(null)
-        setTimeout(setupSocket, 3000)
-        makeToast('error', 'Socket Disconnected!')
-        })
+        if (accessToken && !socket) {
+            const newSocket = io('http://localhost:8000', {
 
-        newSocket.on('connect', () => {
+                query: {
+                    token: accessToken
+                }
+            })
 
-         
-        setSocket(newSocket)
-        
-        makeToast('success', 'Socket Connected!')
-        })
-        
+
+            newSocket.on('disconnect', () => {
+                setSocket(null)
+                setTimeout(setupSocket, 3000)
+                makeToast('error', 'Socket Disconnected!')
+            })
+
+            newSocket.on('connect', () => {
+
+
+                setSocket(newSocket)
+
+                makeToast('success', 'Socket Connected!')
+            })
+
         }
     }
-    
-    const getChatrooms = ()=>{
-        fetch(`${ API }/chatroom/${dataUser.id}`, {
+
+    const getChatrooms = () => {
+        fetch(`${API}/chatroom/${dataUser.id}`, {
             headers: {
                 Authorization: `${accessToken}`
-                
+
             }
         }).then(response => response.json())
-        .then(data => {  
-            
-            setChatrooms(data) 
-        } )
-        .catch(err => {
-        makeToast('error', err.data.error)
-        
-        setTimeout(getChatrooms, 3000)
-    })
-        
+            .then(data => {
+
+                setChatrooms(data)
+            })
+            .catch(err => {
+                makeToast('error', err.data.error)
+
+                setTimeout(getChatrooms, 3000)
+            })
+
     }
 
     const crearChatroom = (chatroomName) => {
         const nombre = chatroomName
 
-        if(!nombre){
+        if (!nombre) {
             makeToast('error', 'Debe ingresar un nombre para crear sala')
-        }else{
-            fetch(`${ API }/chatroom/crear/${dataUser.id}`, {
+        } else {
+            fetch(`${API}/chatroom/crear/${dataUser.id}`, {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
                     Authorization: ` ${accessToken}`,
-                    "Content-Type" : "application/json"
+                    "Content-Type": "application/json"
                 },
-                
-                body: JSON.stringify({name: nombre})
-            }).then(response => response.json())
-            .then(data => {
-                makeToast('success', data.mensaje)
-                
-                getChatrooms()
-                
-            }).catch(error => {
-                makeToast('error' , error.error)
 
-                
-            })
-    }
+                body: JSON.stringify({ name: nombre })
+            }).then(response => response.json())
+                .then(data => {
+                    makeToast('success', data.mensaje)
+
+                    getChatrooms()
+
+                }).catch(error => {
+                    makeToast('error', error.error)
+
+
+                })
+        }
     }
 
     const eliminarSala = () => {
         const id = chatroomsId
-        if(id === null) {
+        if (id === null) {
             makeToast('error', 'Debe seleccionar chatroom')
         } else {
             fetch(`${API}/chatroom/eliminar/${id}/${dataUser.id}`, {
@@ -119,7 +121,7 @@ import { Card, Grid, Button, Select, MenuItem,
                 headers: {
                     Accept: "application/json",
                     Authorization: ` ${accessToken}`,
-                    "Content-Type" : "application/json"
+                    "Content-Type": "application/json"
                 }
             }).then(response => {
                 makeToast('success', 'Se ha eliminado sala con éxito')
@@ -127,7 +129,7 @@ import { Card, Grid, Button, Select, MenuItem,
                 setChatroomsId(null)
             }).catch(error => {
                 makeToast('error', 'Ha ocurrido un error')
-               
+
             })
         }
     }
@@ -137,28 +139,28 @@ import { Card, Grid, Button, Select, MenuItem,
     }
 
     React.useEffect(() => {
-        
+
         getChatrooms()
         setChatroomsId(null)
         setupSocket()
-        
-    //eslint-disable-next-line
+
+        //eslint-disable-next-line
     }, [])
     const ingresarSala = () => {
-        
+
         props.history.push("/chatroom/" + chatroomsId)
         props.setupSocket();
     }
     const handleChangeChatroom = name => event => {
         const value = event.target.value
-        setChatroomName(value)   
+        setChatroomName(value)
     }
 
     const handleChange = name => event => {
         const value = event.target.value
-        if(value === 'nulo'){
+        if (value === 'nulo') {
             setChatroomsId(null)
-        }else{
+        } else {
             setChatroomsId(value)
         }
     }
@@ -169,7 +171,7 @@ import { Card, Grid, Button, Select, MenuItem,
 
 
     const verificarId = () => {
-        return chatroomsId!=null ? (    
+        return chatroomsId != null ? (
             <div align="center">
                 <Button variant="contained" color="primary" onClick={ingresarSala}> Ingresar
                 </Button>
@@ -182,15 +184,15 @@ import { Card, Grid, Button, Select, MenuItem,
     };
 
     const verificarTipo = () => {
-        if(dataUser.tipo === 0){
+        if (dataUser.tipo === 0) {
             return (
                 <Grid containter spacing={3} justify="center" alignItems="center">
-                <Grid item xs={12}>
-                    <Card>
-                        <CardContent>
+                    <Grid item xs={12}>
+                        <Card>
+                            <CardContent>
                                 <Typography className={classes.root}>{"CHATROOMS DE INKAPP"}</Typography>
                                 <TextField
-                                    name="chatroomName" 
+                                    name="chatroomName"
                                     id="chatroomName"
                                     label="Nombre de la sala"
                                     style={{ margin: 8 }}
@@ -206,78 +208,78 @@ import { Card, Grid, Button, Select, MenuItem,
                                     <div align="center" >
                                         <Button variant="contained" color="primary" onClick={clickSubmit}>Crear nueva sala</Button>
                                     </div>
-                                </Grid> 
+                                </Grid>
                                 <div align="center" >
                                     <FormControl variant="filled" className={classes.formControl}>
                                         <InputLabel id="demo-simple-select-filled-label">Salas</InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-filled-label"
-                                                id="demo-simple-select-filled"
-                                                onChange={handleChange('chatroom')}
-                                            >
-                                            {chatrooms.map((chatroom)=> (
-                                                <MenuItem key={chatroom._id} className="chatroom" value={chatroom._id}>
-                                                    {chatroom.name}
-                                                </MenuItem>
-                                            ))}
-                                            </Select>
-                                    </FormControl>
-                                        {verificarId()}  
-                                        <Button variant="contained" color="secondary" className="join" onClick={eliminarSala}> 
-                                            Eliminar sala 
-                                        </Button> 
-                                </div>
-                            </CardContent>
-                    </Card>
-                </Grid>
-                </Grid>
-            ) 
-        }else {
-            return (
-                <Grid container spacing={3} alignItems="center" justifiy="center" alignContent="center" style={{marginTop: 50}}>
-                    <Grid item xs={12}>
-                        <Card>
-                            <Typography className={classes.root}>{"CHATROOMS DE INKAPP"}</Typography>
-                                <CardContent className="cardBody">
-                                <div align="center">
-                                    <FormControl variant="filled" className={classes.formControl}>
-                                    <InputLabel id="demo-simple-select-filled-label">Salas</InputLabel>
                                         <Select
                                             labelId="demo-simple-select-filled-label"
                                             id="demo-simple-select-filled"
                                             onChange={handleChange('chatroom')}
                                         >
-                                        <MenuItem>
-                                            <em>Seleccione sala</em>
-                                        </MenuItem>
-                                        {chatrooms.map((chatroom)=> (
-                                        <MenuItem key={chatroom._id} className="chatroom" value={chatroom._id}>
-                                            {chatroom.name}
-                                        </MenuItem>
-                                    ))}
-                                        
-                                    </Select>
+                                            {chatrooms.map((chatroom) => (
+                                                <MenuItem key={chatroom._id} className="chatroom" value={chatroom._id}>
+                                                    {chatroom.name}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    {verificarId()}
+                                    <Button variant="contained" color="secondary" className="join" onClick={eliminarSala}>
+                                        Eliminar sala
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+            )
+        } else {
+            return (
+                <Grid container spacing={3} alignItems="center" justifiy="center" alignContent="center" style={{ marginTop: 50 }}>
+                    <Grid item xs={12}>
+                        <Card>
+                            <Typography className={classes.root}>{"CHATROOMS DE INKAPP"}</Typography>
+                            <CardContent className="cardBody">
+                                <div align="center">
+                                    <FormControl variant="filled" className={classes.formControl}>
+                                        <InputLabel id="demo-simple-select-filled-label">Salas</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-filled-label"
+                                            id="demo-simple-select-filled"
+                                            onChange={handleChange('chatroom')}
+                                        >
+                                            <MenuItem>
+                                                <em>Seleccione sala</em>
+                                            </MenuItem>
+                                            {chatrooms.map((chatroom) => (
+                                                <MenuItem key={chatroom._id} className="chatroom" value={chatroom._id}>
+                                                    {chatroom.name}
+                                                </MenuItem>
+                                            ))}
+
+                                        </Select>
                                     </FormControl>
                                 </div>
-                                    {verificarId()}               
-                                </CardContent>
+                                {verificarId()}
+                            </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
             )
         }
     }
-        
+
     return (
         <Layout
             title="Chatrooms de inkapp"
             description="Sientete libre de chatear con los demás usuarios"
             className="container col-md-8 offset-md-2"
         >
-           { verificarTipo() }
-            
+            {verificarTipo()}
+
         </Layout>
-        
+
     )
 }
 export default withRouter(DashboardPage)

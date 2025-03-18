@@ -59,14 +59,14 @@ const UpdateRegion = ({ match }) => {
             if (data.error) {
                 makeToast("error", data.error)
             } else {
-                setValues({...values, succes: true})
+                setValues({ ...values, succes: true })
                 makeToast("success", `${nombre} se ha actualizado con éxito.`)
             }
         })
     };
 
     const goBack = () => {
-        if(succes){
+        if (succes) {
             return <Redirect to="/manage/region" />
         }
     };
@@ -105,7 +105,7 @@ const UpdateRegion = ({ match }) => {
                     variant="contained"
                     color="secondary"
                     className={classes.submit}
-                    onClick={ ()=> {setValues({...values, succes:true})} }
+                    onClick={() => { setValues({ ...values, succes: true }) }}
                 >
                     Volver sin modificar
                 </Button>

@@ -41,11 +41,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& > * + *': {
-          marginTop: theme.spacing(2),
+            marginTop: theme.spacing(2),
         },
     }
 }));
-    
+
 const ManageParte = () => {
     //LLAMADO A LOS ESITLOS
     const classes = useStyles();
@@ -61,37 +61,37 @@ const ManageParte = () => {
     //FUNCION CARGAR ESTADOS
     const loadPartes = () => {
         getPartes().then(data => {
-            if(data.error) {
+            if (data.error) {
                 makeToast('error', data.error)
                 setError(data.error)
-                setTimeout( function () {setLoading(true)}, 2000) 
-            }else{
+                setTimeout(function () { setLoading(true) }, 2000)
+            } else {
                 setPartes(data.data);
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
-    
+
     const showError = () => (
-        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
             {error}
         </div>
     )
     //FUNCION DESTRUIR ESTADO
     const destroyParte = idR => {
         deleteParte(idR, dataUser.id, accessToken).then(data => {
-            if(data.error){
+            if (data.error) {
                 makeToast('error', data.error)
-                setTimeout( function () {setLoading(true)}, 2000)
-            }else{
+                setTimeout(function () { setLoading(true) }, 2000)
+            } else {
                 makeToast("success", data.mensaje)
                 loadPartes();
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         loadPartes();
     }, [])
 
@@ -104,14 +104,14 @@ const ManageParte = () => {
     const clickSubmit = (e) => {
         e.preventDefault();
         //Request to API
-        createParte( dataUser.id, accessToken, {nombre}).then(data => {
-            if(data.error) {
+        createParte(dataUser.id, accessToken, { nombre }).then(data => {
+            if (data.error) {
                 makeToast("error", "El estado ingresada ya existe")
-            }else {
+            } else {
                 makeToast("success", `La parte ${nombre} se ha creado con éxito.`)
                 setNombre('')
                 loadPartes();
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         });
     };
@@ -119,33 +119,33 @@ const ManageParte = () => {
     const newParteCuerpoForm = () => (
         <Container component="main" >
             <CssBaseline />
-                <form className={classes.form} >
-                    <Grid container spacing={2}>    
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="standard"
-                                required
-                                fullWidth
-                                label="Nombre de la parte"
-                                onChange={handleChange}
-                                value={nombre}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        className={classes.submit}
-                        onClick={clickSubmit}
-                    >
-                        Crear parte
-                    </Button>
-                        </Grid>
+            <form className={classes.form} >
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            variant="standard"
+                            required
+                            fullWidth
+                            label="Nombre de la parte"
+                            onChange={handleChange}
+                            value={nombre}
+                        />
                     </Grid>
-                    
-                </form>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                            className={classes.submit}
+                            onClick={clickSubmit}
+                        >
+                            Crear parte
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </form>
         </Container>
     )
 
@@ -162,10 +162,10 @@ const ManageParte = () => {
             <Typography variant="h5" component="h2" align="center">
                 Administrar Partes del cuerpo
             </Typography>
-            
-            
+
+
             <TableContainer component={Paper}>
-                
+
                 <Table className={classes.table} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow >
@@ -183,53 +183,53 @@ const ManageParte = () => {
                                             {parte.nombre}
                                         </TableCell>
                                         <TableCell align="left" >
-                                        <Link to={`/manage/parte/update/${parte._id}`}>
-                                            <EditIcon style={{ marginLeft: "7%", cursor:"pointer" }} />
-                                        </Link>
-                                            
-                                            
+                                            <Link to={`/manage/parte/update/${parte._id}`}>
+                                                <EditIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
+
+
                                         </TableCell>
                                         <TableCell align="left">
-                                        <Link onClick={() => destroyParte(parte._id)}>
-                                            <DeleteIcon style={{ marginLeft: "7%", cursor:"pointer" }} />
-                                        </Link>
-                                            
-                                            
+                                            <Link onClick={() => destroyParte(parte._id)}>
+                                                <DeleteIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
+
+
 
                                         </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         ) : (
-                            loading ? 
-                            null
-                         : (
-                             <TableBody>
-                                <TableCell>
-                                    <div className={classes.root}>
-                                        <LinearProgress color="primary"/>
-                                    </div>
-                                </TableCell>
-                                <TableCell>
-                                    <div className={classes.root}>
-                                        <LinearProgress color="primary"/>
-                                    </div>
-                                </TableCell>
-                                <TableCell>
-                                    <div className={classes.root}>
-                                        <LinearProgress color="primary"/>
-                                    </div>
-                                </TableCell>
-                            </TableBody>
-                        )
+                            loading ?
+                                null
+                                : (
+                                    <TableBody>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                    </TableBody>
+                                )
                         )
                     }
-                    
+
                 </Table>
             </TableContainer>
-                    {
-                        loading && partes.length === 0 ? showError() : null
-                    }
+            {
+                loading && partes.length === 0 ? showError() : null
+            }
         </Layout>
     );
 }

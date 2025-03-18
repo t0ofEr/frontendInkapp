@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { isAuthenticated } from '../auth';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,8 +13,8 @@ import makeToast from '../Toaster/Toaster';
 
 
 const CardProject = ({ horas }) => {
-  const {dataUser} = isAuthenticated()
-const useStyles = makeStyles({
+  const { dataUser } = isAuthenticated()
+  const useStyles = makeStyles({
     root: {
       minWidth: 190,
     },
@@ -27,16 +27,16 @@ const useStyles = makeStyles({
     },
   });
   const classes = useStyles();
-      
+
   return (
-  
+
     horas ? (
       horas.estado.nombre !== 'Agendada' ? (
         <Grid item xs={3}>
           <Card>
             <CardContent>
               <Typography variant="h5" component="h2" align="center">
-              {moment(horas.fecha).format('Do MMMM')}
+                {moment(horas.fecha).format('Do MMMM')}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 {horas.estado.nombre}
@@ -51,25 +51,25 @@ const useStyles = makeStyles({
             <CardActions>
               {
                 dataUser.membresia === true ? (
-                <Link to={`/profile/do-reserve-hour/${horas._id}`}>
-                  <Button size="small" >Agendar</Button>
-                </Link>
-              ) : (
-                <Link onClick={() => {makeToast('error', 'Debes adquirir una membresía')}}>
-                  <Button size="small" >Agendar</Button>
-                </Link>
-              )
+                  <Link to={`/profile/do-reserve-hour/${horas._id}`}>
+                    <Button size="small" >Agendar</Button>
+                  </Link>
+                ) : (
+                  <Link onClick={() => { makeToast('error', 'Debes adquirir una membresía') }}>
+                    <Button size="small" >Agendar</Button>
+                  </Link>
+                )
               }
-              
+
             </CardActions>
           </Card>
-      </Grid>
+        </Grid>
       ) : (
         <Grid item xs={3}>
           <Card>
             <CardContent>
               <Typography variant="h5" component="h2" align="center">
-              {moment(horas.fecha).format('Do MMMM')}
+                {moment(horas.fecha).format('Do MMMM')}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 {horas.estado.nombre}
@@ -85,7 +85,7 @@ const useStyles = makeStyles({
         </Grid>
       )
     ) : null
-  
+
   );
 }
 export default CardProject

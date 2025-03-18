@@ -11,12 +11,12 @@ export const createRegion = (id, accesToken, region) => {
         },
         body: JSON.stringify(region)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err
+        });
 };
 
 export const createParte = (id, accesToken, parte) => {
@@ -29,12 +29,12 @@ export const createParte = (id, accesToken, parte) => {
         },
         body: JSON.stringify(parte)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //FUNCION CREAR ESTADO
@@ -48,12 +48,12 @@ export const createEstado = (id, accesToken, estado) => {
         },
         body: JSON.stringify(estado)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //FUNCION CREAR ESTILO DE TATUAJE
@@ -67,12 +67,12 @@ export const createEstiloTatuaje = (id, accesToken, estilo) => {
         },
         body: JSON.stringify(estilo)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //OBTENER LISTADO REGIONES
@@ -80,24 +80,24 @@ export const getRegiones = () => {
     return fetch(`${API}/region/listado`, {
         method: "GET"
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch(err => {
-        return err
-    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err
+        })
 };
 
 export const getPartes = () => {
     return fetch(`${API}/parte/listado`, {
         method: "GET"
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch(err => {
-        return err
-    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err
+        })
 };
 
 //OBTENER LISTADO ESTADOS
@@ -108,12 +108,12 @@ export const getEstados = (id, accesToken) => {
             Authorization: `${accesToken}`
         }
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //OBTENER LISTADO ESTILOS DE TATUAJE
@@ -124,12 +124,12 @@ export const getEstilosTatuajes = (id, accesToken) => {
             Authorization: `${accesToken}`
         }
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err;
+        });
 
 };
 
@@ -141,12 +141,12 @@ export const getRegion = (idR, idU, accesToken) => {
             Authorization: `${accesToken}`
         }
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch(err => {
-        return err
-    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err
+        })
 };
 
 export const getParte = (idP, idU, accesToken) => {
@@ -156,12 +156,12 @@ export const getParte = (idP, idU, accesToken) => {
             Authorization: `${accesToken}`
         }
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //OBTENER/BUSCAR ESTADO
@@ -172,12 +172,12 @@ export const getEstado = (idE, idU, accesToken) => {
             Authorization: `${accesToken}`
         }
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //OBTENER/BUSCAR ESTILO DE TATUAJE
@@ -185,12 +185,12 @@ export const getEstiloTatuaje = (idET) => {
     return fetch(`${API}/tipoTatuajes/buscar/${idET}`, {
         method: "GET",
     })
-    .then( response => {
-        return response.json()
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 
@@ -205,12 +205,12 @@ export const updateRegion = (idR, idU, accessToken, region) => {
         },
         body: JSON.stringify(region)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 export const updateParte = (idP, idU, accessToken, parte) => {
@@ -223,12 +223,12 @@ export const updateParte = (idP, idU, accessToken, parte) => {
         },
         body: JSON.stringify(parte)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err
+        });
 };
 
 //ACTUALIZAR ESTADO
@@ -242,12 +242,12 @@ export const updateEstado = (idE, idU, accessToken, estado) => {
         },
         body: JSON.stringify(estado)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //ACTUALIZAR ESTILO DE TATUAJE
@@ -261,12 +261,12 @@ export const updateEstiloTatuaje = (idET, idU, accessToken, estilo) => {
         },
         body: JSON.stringify(estilo)
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //ELIMINAR REGION
@@ -278,12 +278,12 @@ export const deleteRegion = (idR, idU, accessToken) => {
             Authorization: `${accessToken}`
         }
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 export const deleteParte = (idP, idU, accessToken) => {
@@ -294,12 +294,12 @@ export const deleteParte = (idP, idU, accessToken) => {
             Authorization: `${accessToken}`
         }
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err
+        });
 };
 
 //ELIMINAR ESTADO
@@ -311,12 +311,12 @@ export const deleteEstado = (idE, idU, accessToken) => {
             Authorization: `${accessToken}`
         }
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };
 
 //ELIMINAR ESTILO DE TATUAJE
@@ -328,10 +328,10 @@ export const deleteEstiloTatuaje = (idET, idU, accessToken) => {
             Authorization: `${accessToken}`
         }
     })
-    .then( response => {
-        return response.json(); 
-    })
-    .catch( err => {
-        return err;
-    });
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
 };

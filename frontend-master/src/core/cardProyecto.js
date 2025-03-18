@@ -19,7 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Swal from 'sweetalert2';
 import { deleteProject } from '../user/apiUser';
 const CardProyectoPage = ({ project }) => {
-    const {dataUser, accessToken} = isAuthenticated()
+    const { dataUser, accessToken } = isAuthenticated()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [redirect, setRedirect] = React.useState(false)
     const handleClick = (event) => {
@@ -31,12 +31,12 @@ const CardProyectoPage = ({ project }) => {
     };
 
     const redirectTo = () => {
-        if(redirect){
-            return <Redirect to= {`/profile/myprojects/${dataUser.id}`}/>
+        if (redirect) {
+            return <Redirect to={`/profile/myprojects/${dataUser.id}`} />
         }
     }
     const clickEliminar = event => {
-        
+
         event.preventDefault()
         setAnchorEl(null)
         Swal.fire({
@@ -47,47 +47,47 @@ const CardProyectoPage = ({ project }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                deleteProject(dataUser.id, accessToken, project._id).then((data)=> {
-                    if(data.error){
+                deleteProject(dataUser.id, accessToken, project._id).then((data) => {
+                    if (data.error) {
                         Swal.fire(
                             'Error!',
                             data.error,
                             'error'
-                          )
-                    }else {
+                        )
+                    } else {
                         setRedirect(true)
                     }
                 })
             }
-          })
+        })
     }
-    const useStyles = makeStyles( (theme)=> ({
-          card: {
+    const useStyles = makeStyles((theme) => ({
+        card: {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-          },
-          cardContent: {
+        },
+        cardContent: {
             flexGrow: 1,
-          }
-      }));
+        }
+    }));
 
     const classes = useStyles()
 
-    return ( 
-        
+    return (
+
         <Grid item xs={6}>
             <Card className={classes.card}>
-            <CardHeader
+                <CardHeader
                     avatar={
                         <Link to={`/profile/${project.creador._id}`}>
-                            <ShowAvatar image={project.creador} url="perfil"/>
+                            <ShowAvatar image={project.creador} url="perfil" />
                         </Link>
                     }
-                    title={ 
-                        project.creador.userName  
+                    title={
+                        project.creador.userName
                     }
                     subheader={
                         moment(project.createdAt).fromNow()
@@ -96,7 +96,7 @@ const CardProyectoPage = ({ project }) => {
                         dataUser.id === project.creador._id ? (
                             <div>
                                 <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                    <MoreVert/>
+                                    <MoreVert />
                                 </IconButton>
                                 <Menu
                                     id="simple-menu"
@@ -105,13 +105,13 @@ const CardProyectoPage = ({ project }) => {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <Link to={`/profile/project/offers/${project._id}`} style={{textDecoration: 'none'}}>
-                                        <MenuItem onClick={handleClose} style= {{color: 'orange'}}>Ver ofertas</MenuItem>
+                                    <Link to={`/profile/project/offers/${project._id}`} style={{ textDecoration: 'none' }}>
+                                        <MenuItem onClick={handleClose} style={{ color: 'orange' }}>Ver ofertas</MenuItem>
                                     </Link>
-                                    <Link to={`/profile/project/update/${project._id}`} style={{textDecoration: 'none'}}>
-                                        <MenuItem style= {{color: 'blue'}}>Modificar</MenuItem>
+                                    <Link to={`/profile/project/update/${project._id}`} style={{ textDecoration: 'none' }}>
+                                        <MenuItem style={{ color: 'blue' }}>Modificar</MenuItem>
                                     </Link>
-                                    <MenuItem onClick={clickEliminar} style={{color:'red'}}>Eliminar</MenuItem>
+                                    <MenuItem onClick={clickEliminar} style={{ color: 'red' }}>Eliminar</MenuItem>
                                 </Menu>
                             </div>
                         ) : (
@@ -119,11 +119,11 @@ const CardProyectoPage = ({ project }) => {
                         )
                     }
                 />
-                <ShowImage image={project} url="proyecto" w="100%" h="100%"/>
+                <ShowImage image={project} url="proyecto" w="100%" h="100%" />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="h2" align="center">
-                            {project.nombre}
-                        </Typography>
+                        {project.nombre}
+                    </Typography>
                     <Typography variant="body2" color="textSecondary" component="p" align="center">
                         {project.descripcion}
                     </Typography>
@@ -140,25 +140,25 @@ const CardProyectoPage = ({ project }) => {
                         {project.estado.nombre}
                     </Typography>
                     <Grid item xs={12} align="center">
-                    <Button size="small" color="primary">
-                        {
-                            (project.estado.nombre === "Terminado" || project.creador._id === dataUser.id)  ? (
-                                <div></div>
-                            ) : (
-                                <Link to={`/profile/project/doOffer/${project._id}`}>
-                                    <button className="btn btn-outline-warning mt-2 mb-2">
-                                        Realizar oferta
-                                    </button>
-                                </Link>
-                            )
-                        }    
-                    </Button>
+                        <Button size="small" color="primary">
+                            {
+                                (project.estado.nombre === "Terminado" || project.creador._id === dataUser.id) ? (
+                                    <div></div>
+                                ) : (
+                                    <Link to={`/profile/project/doOffer/${project._id}`}>
+                                        <button className="btn btn-outline-warning mt-2 mb-2">
+                                            Realizar oferta
+                                        </button>
+                                    </Link>
+                                )
+                            }
+                        </Button>
                     </Grid>
                 </CardContent>
             </Card>
             {redirectTo()}
         </Grid>
-        )
+    )
 }
 
 export default CardProyectoPage

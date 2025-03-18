@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 const Layout = ({ title = "Title", description = "Description", jumbotron = "true", slide = "false", className, children }) => (
     <div>
-        <Menu />  
+        <Menu />
         {
             jumbotron === "true" ? (
                 <Fragment>
@@ -54,8 +54,8 @@ const Layout = ({ title = "Title", description = "Description", jumbotron = "tru
                 )
         }
 
-        <br/>
-        <Footer/>
+        <br />
+        <Footer />
 
     </div>
 );

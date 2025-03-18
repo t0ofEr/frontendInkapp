@@ -9,13 +9,13 @@ import { Grid } from '@material-ui/core';
 const PublicacionPage = props => {
 
     const [publicacion, setPublicacion] = useState({});
-    const {accessToken, dataUser} = isAuthenticated();
+    const { accessToken, dataUser } = isAuthenticated();
     const [loading, setLoading] = useState(false)
     const loadPublicacion = publicacionId => {
         getPublicacion(publicacionId, dataUser.id, accessToken).then(data => {
-            if(data.error) {
+            if (data.error) {
                 makeToast('error', data.error)
-            }else{
+            } else {
                 setPublicacion(data);
                 setLoading(true)
             }
@@ -28,21 +28,21 @@ const PublicacionPage = props => {
     }, [])
 
     return (
-        <Layout 
-            title={`Publicación`} 
-            description={""} 
+        <Layout
+            title={`Publicación`}
+            description={""}
             className="container-fluid"
             jumbotron={false}
         >
             <Grid container justify="center" alignContent="center" alignItems="center">
                 {
                     publicacion && loading ? (
-                        <CardPublicacionPage publicacion={publicacion}/>
+                        <CardPublicacionPage publicacion={publicacion} />
                     ) : (
-                        <CardSkeleton/>
-                    )  
+                        <CardSkeleton />
+                    )
                 }
-            </Grid>                       
+            </Grid>
         </Layout>
     );
 }

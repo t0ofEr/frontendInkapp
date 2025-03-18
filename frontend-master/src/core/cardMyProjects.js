@@ -13,16 +13,16 @@ import Typography from '@material-ui/core/Typography';
 import { CardActions } from '@material-ui/core'
 
 
- const useStyles = makeStyles((theme) => ({
-        card: {
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        cardContent: {
-            flexGrow: 1,
-        },
-    }));
+const useStyles = makeStyles((theme) => ({
+    card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    cardContent: {
+        flexGrow: 1,
+    },
+}));
 
 const CardMyProject = ({ project }) => {
     const { dataUser, accessToken } = isAuthenticated()
@@ -58,7 +58,7 @@ const CardMyProject = ({ project }) => {
 
         <Card className={classes.card}>
             <Link to={`/profile/project/view/${project._id}`}>
-                <ShowImage image={project} url="proyecto" w="100%" h="300px"/>
+                <ShowImage image={project} url="proyecto" w="100%" h="300px" />
             </Link>
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2" align="center">

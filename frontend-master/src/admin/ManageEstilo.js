@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& > * + *': {
-          marginTop: theme.spacing(2),
+            marginTop: theme.spacing(2),
         },
     }
 }));
@@ -63,15 +63,15 @@ const ManageEstilo = () => {
         getEstilosTatuajes(dataUser.id, accessToken).then(data => {
             if (data.error) {
                 setError(data.error)
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             } else {
                 setEstilos(data.data);
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
     const showError = () => (
-        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
             {error}
         </div>
     )
@@ -81,11 +81,11 @@ const ManageEstilo = () => {
         deleteEstiloTatuaje(idR, dataUser.id, accessToken).then(data => {
             if (data.error) {
                 makeToast("error", "Error al eliminar")
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             } else {
                 makeToast("success", "El estilo se ha borrado con éxito")
                 loadEstilos();
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
@@ -103,14 +103,14 @@ const ManageEstilo = () => {
     const clickSubmit = (e) => {
         e.preventDefault();
         //Request to API
-        createEstiloTatuaje( dataUser.id, accessToken, {nombre}).then(data => {
-            if(data.error) {
+        createEstiloTatuaje(dataUser.id, accessToken, { nombre }).then(data => {
+            if (data.error) {
                 makeToast("error", "El estilo ingresada ya existe")
-            }else {
+            } else {
                 makeToast("success", `El estilo ${nombre} se ha creado con éxito.`)
                 setNombre('')
                 loadEstilos();
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         });
     };
@@ -119,33 +119,33 @@ const ManageEstilo = () => {
     const newEstiloForm = () => (
         <Container component="main" >
             <CssBaseline />
-                <form className={classes.form} >
-                    <Grid container spacing={2}>    
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="standard"
-                                required
-                                fullWidth
-                                label="Nombre del Estilo de tatuaje"
-                                onChange={handleChange}
-                                value={nombre}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        className={classes.submit}
-                        onClick={clickSubmit}
-                    >
-                        Crear estilo de tatuaje
-                    </Button>
-                        </Grid>
+            <form className={classes.form} >
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            variant="standard"
+                            required
+                            fullWidth
+                            label="Nombre del Estilo de tatuaje"
+                            onChange={handleChange}
+                            value={nombre}
+                        />
                     </Grid>
-                    
-                </form>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                            className={classes.submit}
+                            onClick={clickSubmit}
+                        >
+                            Crear estilo de tatuaje
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </form>
         </Container>
     )
 
@@ -176,61 +176,61 @@ const ManageEstilo = () => {
                     </TableHead>
                     {
                         estilos && loading ? (
-                        <TableBody>
-                            {estilos.map((estilo) => (
-                                <TableRow key={estilo.nombre}>
-                                    <TableCell component="th" scope="row">
-                                        {estilo.nombre}
-                                    </TableCell>
-                                    <TableCell align="left" >
-                                        <Link to={`/manage/estiloTatuaje/update/${estilo._id}`}>
-                                            <EditIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
-                                        </Link>
+                            <TableBody>
+                                {estilos.map((estilo) => (
+                                    <TableRow key={estilo.nombre}>
+                                        <TableCell component="th" scope="row">
+                                            {estilo.nombre}
+                                        </TableCell>
+                                        <TableCell align="left" >
+                                            <Link to={`/manage/estiloTatuaje/update/${estilo._id}`}>
+                                                <EditIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
 
 
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        <Link onClick={() => destroyEstilo(estilo._id)}>
-                                            <DeleteIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
-                                        </Link>
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            <Link onClick={() => destroyEstilo(estilo._id)}>
+                                                <DeleteIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
 
 
 
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                        ) : (
-                            loading ? 
-                            null
-                         : (
-                             <TableBody>
-                                <TableCell>
-                                    <div className={classes.root}>
-                                        <LinearProgress color="primary"/>
-                                    </div>
-                                </TableCell>
-                                <TableCell>
-                                    <div className={classes.root}>
-                                        <LinearProgress color="primary"/>
-                                    </div>
-                                </TableCell>
-                                <TableCell>
-                                    <div className={classes.root}>
-                                        <LinearProgress color="primary"/>
-                                    </div>
-                                </TableCell>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
-                        )
+                        ) : (
+                            loading ?
+                                null
+                                : (
+                                    <TableBody>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                    </TableBody>
+                                )
                         )
                     }
-                    
+
                 </Table>
             </TableContainer>
             {
-                loading && estilos.length === 0 ? 
+                loading && estilos.length === 0 ?
                     showError()
-                :  null                
+                    : null
             }
         </Layout>
     );

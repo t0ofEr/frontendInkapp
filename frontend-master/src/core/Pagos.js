@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -19,85 +19,85 @@ import Layout from './Layout';
 import { pagoMembresia } from './apiCore';
 import makeToast from '../Toaster/Toaster'
 const Pagos = () => {
-const {dataUser, accessToken} = isAuthenticated()
-const [loading, setLoading] = useState(false)
-const useStyles = makeStyles((theme) => ({
-  '@global': {
-    ul: {
-      margin: 0,
-      padding: 0,
-      listStyle: 'none',
+  const { dataUser, accessToken } = isAuthenticated()
+  const [loading, setLoading] = useState(false)
+  const useStyles = makeStyles((theme) => ({
+    '@global': {
+      ul: {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
     },
-  },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: 'wrap',
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
-  heroContent: {
-    padding: theme.spacing(8, 0, 6),
-  },
-  cardHeader: {
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
-  },
-  cardPricing: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    marginBottom: theme.spacing(2),
-  }
-}));
-    const realizarPago = event => {
-        event.preventDefault()
-        setLoading(true)
-        if(dataUser.tipo === 1){
-            pagoMembresia('Membresía tatuador', 6990).then(data => {
-                if(data.error){
-                  makeToast('error', 'Ha ocurrido un error')
-                } else {
-                  window.location.href = data
-                }
-            })
-        } else {
-            pagoMembresia('Membresía usuario', 3990).then(data => {
-              if(data.error){
-                  makeToast('error', 'Ha ocurrido un error')
-              } else {
-                window.location.href = data
-              }
-          })
-        }
-         
-        
+    appBar: {
+      borderBottom: `1px solid ${theme.palette.divider}`,
+    },
+    toolbar: {
+      flexWrap: 'wrap',
+    },
+    toolbarTitle: {
+      flexGrow: 1,
+    },
+    link: {
+      margin: theme.spacing(1, 1.5),
+    },
+    heroContent: {
+      padding: theme.spacing(8, 0, 6),
+    },
+    cardHeader: {
+      backgroundColor:
+        theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
+    },
+    cardPricing: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'baseline',
+      marginBottom: theme.spacing(2),
     }
+  }));
+  const realizarPago = event => {
+    event.preventDefault()
+    setLoading(true)
+    if (dataUser.tipo === 1) {
+      pagoMembresia('Membresía tatuador', 6990).then(data => {
+        if (data.error) {
+          makeToast('error', 'Ha ocurrido un error')
+        } else {
+          window.location.href = data
+        }
+      })
+    } else {
+      pagoMembresia('Membresía usuario', 3990).then(data => {
+        if (data.error) {
+          makeToast('error', 'Ha ocurrido un error')
+        } else {
+          window.location.href = data
+        }
+      })
+    }
+
+
+  }
   const classes = useStyles();
 
   return (
     <React.Fragment>
-    <Layout title="Home Page" description="Aplicacion Inkapp para tatuadores." className="container-fluid" jumbotron={false}>
-      <CssBaseline />
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Precio membresía
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Adquiere la membresía de {dataUser.tipo === 1 ? 'tatuadores' : 'usuario premium'} para poder 
-          utilizar todas las funcionalidades de Inkapp y {dataUser.tipo === 1 ? 
-          'potenciar tu negocio con nuevos clientes!' : 
-          'encontrar tu tatuador más conveniente!'
-          }
-        </Typography>
-      </Container>
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} justify="center">
+      <Layout title="Home Page" description="Aplicacion Inkapp para tatuadores." className="container-fluid" jumbotron={false}>
+        <CssBaseline />
+        <Container maxWidth="sm" component="main" className={classes.heroContent}>
+          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            Precio membresía
+          </Typography>
+          <Typography variant="h5" align="center" color="textSecondary" component="p">
+            Adquiere la membresía de {dataUser.tipo === 1 ? 'tatuadores' : 'usuario premium'} para poder
+            utilizar todas las funcionalidades de Inkapp y {dataUser.tipo === 1 ?
+              'potenciar tu negocio con nuevos clientes!' :
+              'encontrar tu tatuador más conveniente!'
+            }
+          </Typography>
+        </Container>
+        <Container maxWidth="md" component="main">
+          <Grid container spacing={5} justify="center">
             <Grid item xs={12} sm={12} md={4} align="center">
               <Card>
                 <CardHeader
@@ -118,15 +118,15 @@ const useStyles = makeStyles((theme) => ({
                     </Typography>
                   </div>
                   <ul>
-                      <Typography component="li" variant="subtitle1" align="center">
-                        Chat Online
-                      </Typography>
-                      <Typography component="li" variant="subtitle1" align="center">
-                        Publicar proyectos
-                      </Typography>
-                      <Typography component="li" variant="subtitle1" align="center">
-                        {dataUser.tipo === 1 ? 'Publicar y administrar agenda' : 'Reservar horas'}
-                      </Typography>
+                    <Typography component="li" variant="subtitle1" align="center">
+                      Chat Online
+                    </Typography>
+                    <Typography component="li" variant="subtitle1" align="center">
+                      Publicar proyectos
+                    </Typography>
+                    <Typography component="li" variant="subtitle1" align="center">
+                      {dataUser.tipo === 1 ? 'Publicar y administrar agenda' : 'Reservar horas'}
+                    </Typography>
                   </ul>
                 </CardContent>
                 <CardActions>
@@ -135,10 +135,10 @@ const useStyles = makeStyles((theme) => ({
                   </Button>
                 </CardActions>
               </Card>
-              
+
             </Grid>
-        </Grid>
-      </Container>
+          </Grid>
+        </Container>
       </Layout>
     </React.Fragment>
   );

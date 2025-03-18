@@ -84,11 +84,11 @@ const Publicaciones = () => {
         getPublicacionesFiltrado(skip, limit, newFilter).then(data => {
             if (data.error) {
                 setError(data.error)
-                setTimeout( function () { setLoading(true) } , 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             } else {
                 setFilteredResult(data.data);
                 setFilteredResultSize(data.size);
-                setTimeout( function () { setLoading(true) } , 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
@@ -98,10 +98,10 @@ const Publicaciones = () => {
             if (data.error) {
                 makeToast("error", data.error)
                 setError(data.error)
-                setTimeout( function () { setLoading(true) } , 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             } else {
                 setEstilos(data.data);
-                setTimeout( function () { setLoading(true) } , 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
@@ -148,14 +148,14 @@ const Publicaciones = () => {
                                     )
                                 ) : (
                                     !error ? (
-                                        filteredResults.map(() => 
-                                        <CardSkeleton/>
-                                    )  
+                                        filteredResults.map(() =>
+                                            <CardSkeleton />
+                                        )
                                     ) : (
                                         <div className={classes.root}>
-                                            <LinearProgress color="secondary"/>
+                                            <LinearProgress color="secondary" />
                                         </div>
-                                    )    
+                                    )
                                 )
                             }
                         </Grid>

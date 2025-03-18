@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& > * + *': {
-          marginTop: theme.spacing(2),
+            marginTop: theme.spacing(2),
         },
     }
 }));
@@ -63,15 +63,15 @@ const ManageRegion = () => {
         getRegiones().then(data => {
             if (data.error) {
                 setError(data.error)
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             } else {
                 setRegiones(data.data);
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
     const showError = () => (
-        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
             {error}
         </div>
     )
@@ -80,11 +80,11 @@ const ManageRegion = () => {
         deleteRegion(idR, dataUser.id, accessToken).then(data => {
             if (data.error) {
                 makeToast('error', data.error)
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             } else {
                 makeToast("success", "La region se ha borrado con éxito")
                 loadRegiones();
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
@@ -102,14 +102,14 @@ const ManageRegion = () => {
     const clickSubmit = (e) => {
         e.preventDefault();
         //Request to API
-        createRegion( dataUser.id, accessToken, {nombre}).then(data => {
-            if(data.error) {
+        createRegion(dataUser.id, accessToken, { nombre }).then(data => {
+            if (data.error) {
                 makeToast("error", "La región ingresada ya existe")
-            }else {
+            } else {
                 makeToast("success", `La región ${nombre} se ha creado con éxito.`)
                 setNombre('')
                 loadRegiones();
-                setTimeout( function () {setLoading(true)}, 2000)
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         });
     };
@@ -118,33 +118,33 @@ const ManageRegion = () => {
     const newRegionForm = () => (
         <Container component="main" >
             <CssBaseline />
-                <form className={classes.form} >
-                    <Grid container spacing={2}>    
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="standard"
-                                required
-                                fullWidth
-                                label="Nombre de la región"
-                                onChange={handleChange}
-                                value={nombre}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        className={classes.submit}
-                        onClick={clickSubmit}
-                    >
-                        Crear región
-                    </Button>
-                        </Grid>
+            <form className={classes.form} >
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            variant="standard"
+                            required
+                            fullWidth
+                            label="Nombre de la región"
+                            onChange={handleChange}
+                            value={nombre}
+                        />
                     </Grid>
-                    
-                </form>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                            className={classes.submit}
+                            onClick={clickSubmit}
+                        >
+                            Crear región
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </form>
         </Container>
     )
 
@@ -173,58 +173,58 @@ const ManageRegion = () => {
                     </TableHead>
                     {
                         regiones && loading ? (
-                        <TableBody>
-                            {regiones.map((region) => (
-                                <TableRow key={region.nombre}>
-                                    <TableCell component="th" scope="row">
-                                        {region.nombre}
-                                    </TableCell>
-                                    <TableCell align="left" >
-                                        <Link to={`/manage/region/update/${region._id}`}>
-                                            <EditIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
-                                        </Link>
+                            <TableBody>
+                                {regiones.map((region) => (
+                                    <TableRow key={region.nombre}>
+                                        <TableCell component="th" scope="row">
+                                            {region.nombre}
+                                        </TableCell>
+                                        <TableCell align="left" >
+                                            <Link to={`/manage/region/update/${region._id}`}>
+                                                <EditIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
 
 
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        <Link onClick={() => destroyRegion(region._id)}>
-                                            <DeleteIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
-                                        </Link>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                         </TableBody>
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            <Link onClick={() => destroyRegion(region._id)}>
+                                                <DeleteIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
                         ) : (
-                            loading ? 
+                            loading ?
                                 null
-                             : (
-                                 <TableBody>
-                                    <TableCell>
-                                        <div className={classes.root}>
-                                            <LinearProgress color="primary"/>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className={classes.root}>
-                                            <LinearProgress color="primary"/>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className={classes.root}>
-                                            <LinearProgress color="primary"/>
-                                        </div>
-                                    </TableCell>
-                                </TableBody>
-                            )
+                                : (
+                                    <TableBody>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                    </TableBody>
+                                )
                         )
                     }
-                    
+
                 </Table>
             </TableContainer>
             {
-                loading && regiones.length === 0 ? 
+                loading && regiones.length === 0 ?
                     showError()
-                :  null                
+                    : null
             }
         </Layout>
     );

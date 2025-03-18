@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(1, 0, 3),
         backgroundColor: "black"
-    },root: {
+    }, root: {
         width: '100%',
         '& > * + *': {
-          marginTop: theme.spacing(2),
+            marginTop: theme.spacing(2),
         },
-      },
+    },
 }));
 
 const ManageEstado = () => {
@@ -60,13 +60,13 @@ const ManageEstado = () => {
     //FUNCION CARGAR ESTADOS
     const loadEstados = () => {
         getEstados(dataUser.id, accessToken).then(data => {
-            if(data.error) {
+            if (data.error) {
                 makeToast('error', data.error)
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
                 setError(data.error)
-            }else{
+            } else {
                 setEstados(data.data);
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
@@ -74,28 +74,28 @@ const ManageEstado = () => {
     //FUNCION DESTRUIR ESTADO
     const destroyEstado = idE => {
         deleteEstado(idE, dataUser.id, accessToken).then(data => {
-            if(data.error){
+            if (data.error) {
                 makeToast('error', data.error)
-                setTimeout( function () {setLoading(true)}, 2000) 
-            }else{
+                setTimeout(function () { setLoading(true) }, 2000)
+            } else {
                 makeToast("success", "El estado se ha borrado con éxito")
                 loadEstados();
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         })
     }
 
     const showError = () => (
-        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
             {error}
         </div>
     )
 
-    useEffect(() =>{
+    useEffect(() => {
         loadEstados();
     }, [])
 
-   
+
     //HANDLE CHANGE PARA CREAR ESTADOS
     const handleChange = (e) => {
         setNombre(e.target.value);
@@ -105,14 +105,14 @@ const ManageEstado = () => {
     const clickSubmit = (e) => {
         e.preventDefault();
         //Request to API
-        createEstado( dataUser.id, accessToken, {nombre}).then(data => {
-            if(data.error) {
+        createEstado(dataUser.id, accessToken, { nombre }).then(data => {
+            if (data.error) {
                 makeToast("error", "El estado ingresada ya existe")
-            }else {
+            } else {
                 makeToast("success", `El estado ${nombre} se ha creado con éxito.`)
                 setNombre('')
                 loadEstados();
-                setTimeout( function () {setLoading(true)}, 2000) 
+                setTimeout(function () { setLoading(true) }, 2000)
             }
         });
     };
@@ -121,38 +121,38 @@ const ManageEstado = () => {
     const newEstadoForm = () => (
         <Container component="main" >
             <CssBaseline />
-                <form className={classes.form} >
-                    <Grid container spacing={2}>    
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="standard"
-                                required
-                                fullWidth
-                                label="Nombre del Estado"
-                                onChange={handleChange}
-                                value={nombre}
-                                
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        className={classes.submit}
-                        onClick={clickSubmit}
-                        
-                    >
-                        Crear estado
-                    </Button>
-                        </Grid>
+            <form className={classes.form} >
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            variant="standard"
+                            required
+                            fullWidth
+                            label="Nombre del Estado"
+                            onChange={handleChange}
+                            value={nombre}
+
+                        />
                     </Grid>
-                    
-                </form>
+                    <Grid item xs={6}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                            className={classes.submit}
+                            onClick={clickSubmit}
+
+                        >
+                            Crear estado
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </form>
         </Container>
     )
-    
+
 
     return (
         <Layout
@@ -160,18 +160,18 @@ const ManageEstado = () => {
             description="CRUD de estados."
             className="container fluid"
         >
-        
-        <Typography variant="h5" component="h2" align="center">
+
+            <Typography variant="h5" component="h2" align="center">
                 Crear nuevo estado
             </Typography>
             {newEstadoForm()}
-        <Typography variant="h5" component="h2" align="center">
+            <Typography variant="h5" component="h2" align="center">
                 Administrar Estados
             </Typography>
-            
-            
+
+
             <TableContainer component={Paper}>
-                
+
                 <Table className={classes.table} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow >
@@ -182,56 +182,56 @@ const ManageEstado = () => {
                     </TableHead>
                     {
                         estados && loading ? (
-                        <TableBody>
-                        {estados.map((estado) => (
-                            <TableRow key={estado.nombre}>
-                                <TableCell component="th" scope="row">
-                                    {estado.nombre}
-                                </TableCell>
-                                <TableCell align="left" >
-                                <Link to={`/manage/estado/update/${estado._id}`}>
-                                    <EditIcon style={{ marginLeft: "7%", cursor:"pointer" }} />
-                                </Link>
-                                    
-                                    
-                                </TableCell>
-                                <TableCell align="left">
-                                <Link onClick={() => destroyEstado(estado._id)}>
-                                    <DeleteIcon style={{ marginLeft: "7%", cursor:"pointer" }} />
-                                </Link>
-                                    
-                                    
+                            <TableBody>
+                                {estados.map((estado) => (
+                                    <TableRow key={estado.nombre}>
+                                        <TableCell component="th" scope="row">
+                                            {estado.nombre}
+                                        </TableCell>
+                                        <TableCell align="left" >
+                                            <Link to={`/manage/estado/update/${estado._id}`}>
+                                                <EditIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
 
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
+
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            <Link onClick={() => destroyEstado(estado._id)}>
+                                                <DeleteIcon style={{ marginLeft: "7%", cursor: "pointer" }} />
+                                            </Link>
+
+
+
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
                         ) : (
-                            loading ? 
+                            loading ?
                                 null
-                             : (
-                                 <TableBody>
-                                    <TableCell>
-                                        <div className={classes.root}>
-                                            <LinearProgress color="primary"/>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className={classes.root}>
-                                            <LinearProgress color="primary"/>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className={classes.root}>
-                                            <LinearProgress color="primary"/>
-                                        </div>
-                                    </TableCell>
-                                </TableBody>
-                            )
-                            
+                                : (
+                                    <TableBody>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className={classes.root}>
+                                                <LinearProgress color="primary" />
+                                            </div>
+                                        </TableCell>
+                                    </TableBody>
+                                )
+
                         )
                     }
-                    
+
                 </Table>
             </TableContainer>
             {

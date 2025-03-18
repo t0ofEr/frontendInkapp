@@ -53,7 +53,7 @@ const Home = () => {
             <Container className={classes.cardGrid} maxWidth="md">
                 {/*CONTENIDO PARA LOS USUARIOS*/}
                 {
-                    isAuthenticated() && (dataUser.tipo === 1 || dataUser.tipo === 2 ) ? (
+                    isAuthenticated() && (dataUser.tipo === 1 || dataUser.tipo === 2) ? (
                         <div>
                             <div className="product-img">
                                 <img
@@ -90,12 +90,12 @@ const Home = () => {
                                     <Button href={"/profile/project/projects/list"}>Ver proyectos</Button> {"/"}
                                     {
                                         dataUser.membresia === false ? (
-                                            <Button onClick = {() => makeToast('error', 'Necesitas adquirir membresía')}>crear proyecto</Button>
+                                            <Button onClick={() => makeToast('error', 'Necesitas adquirir membresía')}>crear proyecto</Button>
                                         ) : (
                                             <Button href={`/profile/project/create/${dataUser.id}`}>crear proyecto</Button>
                                         )
                                     }
-                                    
+
                                 </Grid>
 
                                 <Grid item xs={6}>
@@ -228,144 +228,144 @@ const Home = () => {
 
                         </div>
                     ) :
-                    //CONTENIDO SIN INICIAR SESIÓN
-                    (
-                        <div>
-                            <div className="product-img">
-                                <img
-                                    src={logo}
-                                    alt={logo}
-                                    className={classes.logo}
-                                />
-                                <Typography variant="h4">Aprende más de Inkapp</Typography>
-                                <br />
+                        //CONTENIDO SIN INICIAR SESIÓN
+                        (
+                            <div>
+                                <div className="product-img">
+                                    <img
+                                        src={logo}
+                                        alt={logo}
+                                        className={classes.logo}
+                                    />
+                                    <Typography variant="h4">Aprende más de Inkapp</Typography>
+                                    <br />
+                                </div>
+                                <Grid container spacing={4}>
+                                    <Grid item xs={4}>
+                                        <CreateIcon fontSize="large" />
+                                        <Typography variant="h5" gutterBottom>
+                                            Crea tu cuenta
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Accede a las funcionalidades, creando tu cuenta. Si no tienes una, presiona <Link to={"/signup"}>AQUÍ</Link> para registrarte.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <QuestionAnswerIcon fontSize="large" />
+                                        <Typography variant="h5" gutterBottom>
+                                            Comparte con todos
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Visualiza fácilemente publicaciones, proyectos, perfiles y más. <Link to={"/signin"}>Inicia sesión </Link>ahora para ver lo nuevo en Inkapp.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <StarIcon fontSize="large" />
+                                        <Typography variant="h5" gutterBottom>
+                                            Hazte premium
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Obten el 100% de las funcionalidades, adquiriendo una membresía premium. Ve nuestros planes disponibles AQUÍ.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <ListAltIcon fontSize="large" />
+                                        <Typography variant="h5" gutterBottom>
+                                            Agenda para tatuadores
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Crea tu propia agenda, para que tus clientes puedan reservar tus horas disponibles.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <AccessTimeIcon fontSize="large" />
+                                        <Typography variant="h5" gutterBottom>
+                                            Reservas en linea
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Accede a las agendas de los tatuadores para poder reservar horas.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <EmojiEmotionsIcon fontSize="large" />
+                                        <Typography variant="h5" gutterBottom>
+                                            ¡Reacciona!
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Comenta y da like a las publicaciones o perfiles que te gusten.
+                                        </Typography>
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <br />
+                                        <div className="product-img">
+                                            <img
+                                                src="https://source.unsplash.com/xyJZvUL4_TY"
+                                                alt={"imagen"}
+                                                className={classes.image}
+                                            />
+                                        </div>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <br />
+                                        <Typography variant="h5" gutterBottom>
+                                            ¿No sabes con quien tatuarte?
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Te ayudamos a encontrar el tatuador indicado, justo para lo que necesitas.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography variant="h5" gutterBottom>
+                                            ¿Buscas ideas o diseños para tatuarte?
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Encuentra y comparte ideas en Inkapp con miles de usuarios.
+                                        </Typography>
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <div className="product-img">
+                                            <img
+                                                src="https://source.unsplash.com/06o01CtKjGw"
+                                                alt={"imagen"}
+                                                className={classes.image}
+                                            />
+                                        </div>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <div className="product-img">
+                                            <img
+                                                src="https://source.unsplash.com/6TIpY5KqCYo"
+                                                alt={"imagen"}
+                                                className={classes.image}
+                                            />
+                                        </div>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography variant="h5" gutterBottom>
+                                            Comparte
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            Conoce distintas personas, pero con algo en común.
+                                        </Typography>
+                                        <Typography variant="subtitle1" gutterBottom>
+                                            ¡El amor a la tinta!
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="button" gutterBottom>
+                                            Únete ahora a inkapp
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="button" gutterBottom>
+                                            Solo faltas tú
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
                             </div>
-                            <Grid container spacing={4}>
-                                <Grid item xs={4}>
-                                    <CreateIcon fontSize="large" />
-                                    <Typography variant="h5" gutterBottom>
-                                        Crea tu cuenta
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Accede a las funcionalidades, creando tu cuenta. Si no tienes una, presiona <Link to={"/signup"}>AQUÍ</Link> para registrarte.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <QuestionAnswerIcon fontSize="large" />
-                                    <Typography variant="h5" gutterBottom>
-                                        Comparte con todos
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Visualiza fácilemente publicaciones, proyectos, perfiles y más. <Link to={"/signin"}>Inicia sesión </Link>ahora para ver lo nuevo en Inkapp.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <StarIcon fontSize="large" />
-                                    <Typography variant="h5" gutterBottom>
-                                        Hazte premium
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Obten el 100% de las funcionalidades, adquiriendo una membresía premium. Ve nuestros planes disponibles AQUÍ.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <ListAltIcon fontSize="large" />
-                                    <Typography variant="h5" gutterBottom>
-                                        Agenda para tatuadores
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Crea tu propia agenda, para que tus clientes puedan reservar tus horas disponibles.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <AccessTimeIcon fontSize="large" />
-                                    <Typography variant="h5" gutterBottom>
-                                        Reservas en linea
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Accede a las agendas de los tatuadores para poder reservar horas.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <EmojiEmotionsIcon fontSize="large" />
-                                    <Typography variant="h5" gutterBottom>
-                                        ¡Reacciona!
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Comenta y da like a las publicaciones o perfiles que te gusten.
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={6}>
-                                    <br />
-                                    <div className="product-img">
-                                        <img
-                                            src="https://source.unsplash.com/xyJZvUL4_TY"
-                                            alt={"imagen"}
-                                            className={classes.image}
-                                        />
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <br />
-                                    <Typography variant="h5" gutterBottom>
-                                        ¿No sabes con quien tatuarte?
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Te ayudamos a encontrar el tatuador indicado, justo para lo que necesitas.
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography variant="h5" gutterBottom>
-                                        ¿Buscas ideas o diseños para tatuarte?
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Encuentra y comparte ideas en Inkapp con miles de usuarios.
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={6}>
-                                    <div className="product-img">
-                                        <img
-                                            src="https://source.unsplash.com/06o01CtKjGw"
-                                            alt={"imagen"}
-                                            className={classes.image}
-                                        />
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <div className="product-img">
-                                        <img
-                                            src="https://source.unsplash.com/6TIpY5KqCYo"
-                                            alt={"imagen"}
-                                            className={classes.image}
-                                        />
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography variant="h5" gutterBottom>
-                                        Comparte
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Conoce distintas personas, pero con algo en común.
-                                    </Typography>
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        ¡El amor a la tinta!
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="button" gutterBottom>
-                                        Únete ahora a inkapp
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="button" gutterBottom>
-                                        Solo faltas tú
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </div>
-                    )
+                        )
                 }
             </Container>
         </Layout>

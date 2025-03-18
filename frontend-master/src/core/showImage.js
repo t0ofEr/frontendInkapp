@@ -1,8 +1,8 @@
 import React from 'react'
 import { API } from '../config'
 
-const ShowImage = ({image, url, w, h}) => (
-    <div className = "product-img">
+const ShowImage = ({ image, url, w, h }) => (
+    <div className="product-img">
         <img
             src={`${API}/${url}/imagen/${image._id}`}
             alt={image.name}

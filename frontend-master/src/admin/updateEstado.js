@@ -37,37 +37,37 @@ const UpdateEstado = ({ match }) => {
     const { accessToken, dataUser } = isAuthenticated();
 
     const init = (estadoId) => {
-        getEstado(estadoId, dataUser.id, accessToken).then(data=> {
-            if(data.error){
-                setValues({...values, error: true })
+        getEstado(estadoId, dataUser.id, accessToken).then(data => {
+            if (data.error) {
+                setValues({ ...values, error: true })
             } else {
-                setValues({nombre: data.nombre})
+                setValues({ nombre: data.nombre })
             }
         })
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         init(match.params.estadoId);
     }, []);
 
     const handleChange = name => event => {
-        setValues({...values, [name]: event.target.value, error: false, succes: false})
+        setValues({ ...values, [name]: event.target.value, error: false, succes: false })
     }
 
     const clickSubmit = (e) => {
         e.preventDefault()
-        updateEstado(match.params.estadoId, dataUser.id, accessToken, {nombre}).then(data => {
-            if(data.error){
+        updateEstado(match.params.estadoId, dataUser.id, accessToken, { nombre }).then(data => {
+            if (data.error) {
                 makeToast("error", data.error)
-            }else {
-                setValues({...values, succes: true})
+            } else {
+                setValues({ ...values, succes: true })
                 makeToast("success", `${nombre} se ha actualizado con éxito.`)
             }
         })
     };
 
     const goBack = () => {
-        if(succes){
+        if (succes) {
             return <Redirect to="/manage/estado" />
         }
     };
@@ -105,15 +105,15 @@ const UpdateEstado = ({ match }) => {
                     variant="contained"
                     color="secondary"
                     className={classes.submit}
-                    onClick={ ()=> {setValues({...values, succes:true})} }
+                    onClick={() => { setValues({ ...values, succes: true }) }}
                 >
                     Volver sin modificar
                 </Button>
             </form>
-        </Container>   
+        </Container>
     )
     return (
-        <Layout title="Modificar estado" description={ 'Modificar un estado de la base de datos.'} >
+        <Layout title="Modificar estado" description={'Modificar un estado de la base de datos.'} >
             <div className="row">
                 <div className="col-md-8 offset-md-2">
                     {UpdateEstadoForm()}
